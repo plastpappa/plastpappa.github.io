@@ -1,0 +1,176 @@
+.one {
+  display: none;
+}
+.app.selecting .one {
+  display: block;
+}
+
+div.question {
+  background: white;
+  padding: .5rem 0;
+}
+h1.question {
+  font-family: 'Red Hat Display';
+  font-weight: bold;
+  font-size: 6.5rem;
+  /* color: rgb(49, 48, 55); */
+  text-align: center;
+  word-spacing: 1rem;
+  margin-bottom: 0;
+
+  background: linear-gradient(45deg, #983660, #983660 10%, #fdc582 70%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/*h1.question.top {
+  margin-bottom: -2.5rem;
+  margin-top: 0;
+  color: #e18d93;
+}
+h1.question.top .qcolour {
+  color: #e3b383;
+}
+h1.question.bot {
+  margin-top: -1.5rem;
+  margin-bottom: 0;
+  color: #983660;
+}
+h1.question .you {
+  display: inline-block;
+  background: linear-gradient(45deg, #983660, #983660 10%, #fdc582 70%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+  padding-right: .75rem;
+}
+h1.question .questionmark {
+  color: #fdc582;
+}*/
+
+.separator {
+  position: relative;
+  top: 0;
+  width: 100%;
+  overflow-x: hidden;
+  height: 5px;
+  background: rgb(199, 166, 146);
+  z-index: -1;
+  margin-bottom: 2rem;
+}
+
+.duluxcontainer {
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 3rem;
+  overflow-x: scroll;
+  padding: 3rem 3rem 2rem 3rem;
+  background: white;
+}
+.dulux {
+  width: max-content;
+  overflow-x: scroll;
+}
+
+.group {
+  position: relative;
+  display: inline-flex;
+  width: calc(30vh + 6px);
+  flex-wrap: wrap;
+  font-family: 'Red Hat Display';
+  margin: 0 1rem;
+  gap: 3px;
+}
+.groupoverlay {
+  display: none;
+  position: absolute;
+}
+.group.focus .groupoverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1;
+}
+.groupoverlay.selected {
+  position: fixed;
+}
+.groupoverlay h1 {
+  opacity: 0;
+  font-size: 1.9rem;
+  transition: opacity .2s ease-out;
+  width: 72%;
+  margin: 0;
+  text-align: right;
+  color: #ffffffe3;
+  text-transform: uppercase;
+}
+.groupoverlay.black h1 {
+  color:#1e1e1eb8
+}
+.groupoverlay.ready h1 {
+  opacity: 1;
+  transition: opacity .2s ease-in .2s;
+}
+.groupoverlay.selected h1 {
+  font-size: 6.5rem;
+  width: 50%;
+  text-align: center;
+}
+@media screen and (max-width: 1200px) {
+  .groupoverlay h1 {
+    font-size: 3.8rem;
+  }
+  .groupoverlay.selected h1 {
+    width: 100%;
+    font-size: 8rem;
+  }
+}
+.groupoverlay .buttons {
+  display: none;
+}
+.groupoverlay.selected .buttons {
+  position: absolute;
+  top: calc(50% + 20vh);
+  display: flex;
+  justify-content: space-evenly;
+  color: #ffffffba;
+  width: 72%;
+  font-size: 3.5rem;
+}
+.groupoverlay.selected .buttons a {
+  cursor: pointer;
+}
+.groupoverlay.black .buttons {
+  color:rgba(45, 45, 45, 0.722)
+}
+
+.colour {
+  display: flex;
+  padding-left: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 10vh;
+  height: 5vh;
+}
+.colour p {
+  align-self: flex-end;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100%;
+  float: right;
+  text-align: right;
+  margin: 0;
+  color: rgba(40, 30, 29, 0.75);
+  font-size: .8rem;
+  display: none;
+}
+/*.colour:hover p {
+  display: block;
+}*/
+.colour.white p {
+  color: rgba(255, 255, 255, 0.64)
+}
+
+/*.colour.focus {
+  border: 12px dotted rgb(232, 69, 232);
+}*/
