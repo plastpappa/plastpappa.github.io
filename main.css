@@ -6,6 +6,7 @@
   overflow-x: scroll;
   padding: 0 3rem 2rem 3rem;
   position: relative;
+  overflow: visible;
 }
 .app.selecting .two {
   display: none;
@@ -165,7 +166,7 @@ p.mainsentence {
 
 .canvas canvas {
   position: absolute;
-  top: 0;
+  top: -100px;
   left: 0;
   background: transparent !important;
 }
