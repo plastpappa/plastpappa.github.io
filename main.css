@@ -5,6 +5,7 @@
   margin-top: 1rem;
   overflow-x: scroll;
   padding: 0 3rem 2rem 3rem;
+  position: relative;
 }
 .app.selecting .two {
   display: none;
@@ -155,6 +156,16 @@ p.mainsentence {
 .symboldesc .interaction span.interactiondesc.clash {
   color: #875353;
 }
+.symboldesc .interaction span.interactiondesc.love {
+  color: #d875b0;
+}
 .symboldesc p {
   margin: 0;
+}
+
+.canvas canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent !important;
 }

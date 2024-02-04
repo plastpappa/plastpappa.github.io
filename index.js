@@ -190,6 +190,7 @@ function doStuffHavingSelected() {
   document.querySelector('.todaydate').innerText = `${dayOfWeek}, ${month} ${dateOfMonth}`
 
   const [ [darkHex, [darkName]], [sunHex, [sunName]], [lightHex, [lightName]] ] = duluxTriad(selectedHex)
+  const doValentine = sunName === 'Satsuma Spice'
 
   document.querySelector('.sign.sun').addEventListener('click', () => {
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
@@ -227,6 +228,8 @@ function doStuffHavingSelected() {
   const strings = initStrings(rand, { moon: darkName, sun: sunName, rising: lightName })
 
   const interaction = (col) => {
+    if(doValentine) return 'love'
+
     let diffMain = colourDifference(col, todayRgb),
         [h,s,l]  = rgbToHsl(col),
         [H,S,L]  = rgbToHsl(todayRgb),
@@ -249,14 +252,89 @@ function doStuffHavingSelected() {
     elem.querySelector('.interactiondesc').innerText = int
     elem.querySelector('.interactiondesc').classList.add(int)
 
-    elem.querySelector('.flavour').innerText = strings.processString(`#${int}${name}`)
+    elem.querySelector('.flavour').innerText = doValentine ? (name === 'moon' ? 'I love you.' : (name === 'sun' ? 'I love you so much.' : 'You\'re the best.')) : strings.processString(`#${int}${name}`)
   }
 
   doInteraction('moon', darkHex)
   doInteraction('sun', sunHex)
   doInteraction('rising', lightHex)
 
-  document.querySelector('.mainsentence').innerText = strings.processString("#mainSentence")
+  document.querySelector('.mainsentence').innerText = doValentine ? strings.processString("#valentine") : strings.processString("#mainSentence")
+
+  if(doValentine) {
+    // module aliases
+    const {Engine, Render, Runner, Bodies, Body, Vector, Composite, Events} = Matter    
+    const engine = Engine.create()
+
+    const bounds = document.querySelector('.two').getBoundingClientRect()
+    const groundLevel = document.querySelector('.mainsentence').offsetTop,
+          groundWidth = document.querySelector('.mainsentence').getBoundingClientRect().width
+
+    const render = Render.create({
+      element: document.querySelector('.canvas'),
+      engine: engine,
+      options: {
+        width:  bounds.width,
+        height: bounds.height,
+        wireframes: false 
+      }
+    })
+
+    function pickRandom(xs) {
+      return xs[Math.floor(Math.random() * xs.length)]
+    }
+
+    function makeBox() {
+      const w = groundWidth / 1.5,
+            h = 50
+      
+      const img = pickRandom([ 'carnation_red', 'carnation_pink', 'carnation_orange', 'peony_light', 'peony_pink' ])
+
+      const body = Bodies.circle(
+        (bounds.width - w) / 2 + Math.floor(Math.random() * w),
+        -h + Math.floor(Math.random() * h), 
+        5,
+        {
+          render: {
+              opacity: 0.8,
+              sprite: {
+                  texture: `./${img}.png`,
+                  xScale: 0.3, yScale: 0.3
+              }
+          }
+        }
+      )
+
+      Composite.add(engine.world, body)
+
+      return body
+    }
+    
+    const touched = {}
+    Events.on(engine, 'afterUpdate', function() {
+      let force = Vector.create(0, -1/120)
+      force = Vector.rotate(force, (Math.PI/4)*(Math.random()-0.5))
+
+      engine.world.bodies.forEach((body) => {
+        if(touched[body.id]) {
+          if(body.position.y >= bounds.height) {
+            Composite.remove(engine.world, body)
+          }
+        } else {
+          if(body.position.y >= groundLevel) {
+            Body.applyForce(body, Vector.sub(body.position, Vector.create(0,2)), force)
+            touched[body.id] = true
+          }
+        }
+      })
+    })
+
+    window.setInterval(makeBox, 35)
+
+    Render.run(render)
+    const runner = Runner.create()
+    Runner.run(runner, engine)
+  }
 }
 
 if(selectedHex) {

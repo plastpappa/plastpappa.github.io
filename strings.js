@@ -4,13 +4,13 @@ function initStrings(rand, { moon, sun, rising }) {
   }
 
   const rules = {
-    random: () => pickRandom([ "hello", "bye" ]),
     moon: () => moon,
     sun: () => sun,
     rising: () => rising,
     sign: () => pickRandom([ "#moon moon", "#sun sun", "#rising rising" ]),
     signs: () => pickRandom([ "#moon moons", "#sun suns", "#rising risings" ]),
     mainSentence: () => "#flavour#finalSentence",
+    valentine: () => "I am the luckiest boy on the planet and I can't wait to see you. I hope Li emails you the millions of nice things I wish I always had the words to say to you. Will you be my valentine? Something something a planet is a body.",
 
     clashmoon: () => pickRandom([
       "Something's not right. You're prone to emotional outbursts.",
