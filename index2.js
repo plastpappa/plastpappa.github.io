@@ -261,13 +261,15 @@ function doStuffHavingSelected() {
 
   document.querySelector('.mainsentence').innerText = doValentine ? strings.processString("#valentine") : strings.processString("#mainSentence")
 
+  window.setTimeout(() => {
   if(doValentine) {
     // module aliases
     const {Engine, Render, Runner, Bodies, Body, Vector, Composite, Events} = Matter    
     const engine = Engine.create()
 
     const bounds = document.querySelector('.two').getBoundingClientRect()
-    const groundLevel = document.querySelector('.mainsentence').offsetTop,
+    const height = bounds.height + 120
+    const groundLevel = 100+document.querySelector('.mainsentence').offsetTop,
           groundWidth = document.querySelector('.mainsentence').getBoundingClientRect().width
 
     const render = Render.create({
@@ -275,7 +277,7 @@ function doStuffHavingSelected() {
       engine: engine,
       options: {
         width:  bounds.width,
-        height: bounds.height,
+        height,
         wireframes: false 
       }
     })
@@ -317,7 +319,7 @@ function doStuffHavingSelected() {
 
       engine.world.bodies.forEach((body) => {
         if(touched[body.id]) {
-          if(body.position.y >= bounds.height) {
+          if(body.position.y >= height) {
             Composite.remove(engine.world, body)
           }
         } else {
@@ -335,6 +337,7 @@ function doStuffHavingSelected() {
     const runner = Runner.create()
     Runner.run(runner, engine)
   }
+  })
 }
 
 if(selectedHex) {
