@@ -190,7 +190,7 @@ function doStuffHavingSelected() {
   document.querySelector('.todaydate').innerText = `${dayOfWeek}, ${month} ${dateOfMonth}`
 
   const [ [darkHex, [darkName]], [sunHex, [sunName]], [lightHex, [lightName]] ] = duluxTriad(selectedHex)
-  const doValentine = sunName === 'Satsuma Spice'
+  const doValentine = false //sunName === 'Satsuma Spice'
 
   document.querySelector('.sign.sun').addEventListener('click', () => {
     document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
@@ -200,6 +200,8 @@ function doStuffHavingSelected() {
 
   const rand = getRand(date.toDateString() + sunName),
         randJustDate = getRand(date.toDateString())
+
+  const doSubtleValentine = rand() < 0.1 && (sunName === 'Satsuma Spice')
 
   const moon   = document.querySelector('.sign.moon'), 
         sun    = document.querySelector('.sign.sun'),
@@ -262,7 +264,7 @@ function doStuffHavingSelected() {
   document.querySelector('.mainsentence').innerText = doValentine ? strings.processString("#valentine") : strings.processString("#mainSentence")
 
   window.setTimeout(() => {
-  if(doValentine) {
+  if(doValentine || doSubtleValentine) {
     // module aliases
     const {Engine, Render, Runner, Bodies, Body, Vector, Composite, Events} = Matter    
     const engine = Engine.create()
@@ -298,7 +300,7 @@ function doStuffHavingSelected() {
         5,
         {
           render: {
-              opacity: 0.8,
+              opacity: doSubtleValentine ? 0.4 : 0.8,
               sprite: {
                   texture: `./${img}.png`,
                   xScale: 0.3, yScale: 0.3
