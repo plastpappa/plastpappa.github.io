@@ -302,7 +302,7 @@ function doStuffHavingSelected() {
           render: {
               opacity: doSubtleValentine ? 0.4 : 0.8,
               sprite: {
-                  texture: `./${img}.png`,
+                  texture: `./assets/${img}.png`,
                   xScale: 0.3, yScale: 0.3
               }
           }

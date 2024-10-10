@@ -82,15 +82,6 @@ body {
   bottom: 130px;
 }
 
-/* .sign .bg {
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  background-image: url('./sun.svg');
-  background-clip: padding-box;
-  opacity: 0.2;
-} */
-
 h1.main {
   font-family: 'Rosarivo';
   text-align: center;
