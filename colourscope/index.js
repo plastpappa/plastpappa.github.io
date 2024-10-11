@@ -193,7 +193,7 @@ function doStuffHavingSelected() {
   const doValentine = false //sunName === 'Satsuma Spice'
 
   document.querySelector('.sign.sun').addEventListener('click', () => {
-    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
+    document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString()); });
     document.querySelector('.app').classList.add('selecting')
     window.location.reload()
   })
